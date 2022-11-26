@@ -1,0 +1,20 @@
+.calculator {
+    display: flex;
+    width: 700px;
+    height: 100px;
+    justify-content: center;
+    background-color: aqua;
+    flex-direction: column;
+}
+
+.display {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
