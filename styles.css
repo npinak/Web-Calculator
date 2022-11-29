@@ -1,7 +1,7 @@
 .calculator {
     display: flex;
     width: 700px;
-    height: 100px;
+    height: 700px;
     justify-content: center;
     background-color: aqua;
     flex-direction: column;
@@ -17,4 +17,22 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.numbers {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #ff4500;
+    flex-wrap: wrap;
+    height: 50px;
+    width: 40px;
+}
+
+.numbers>* {
+    height: 10px;
+    width: 10px;
+    padding: 1px;
+
 }
