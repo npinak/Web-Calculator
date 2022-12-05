@@ -18,6 +18,7 @@
     justify-content: center;
     align-items: flex-end;
     flex-wrap: wrap;
+    background-color: forestgreen;
 }
 
 .numbers {
@@ -32,7 +33,36 @@
 
 .numbers>* {
     height: 10px;
-    width: 10px;
+    width: 12px;
     padding: 1px;
 
+}
+
+.operators {
+    display:flex;
+    height: 50px;
+    width: 20px;
+    background-color:blueviolet;
+    flex-direction: column
+}
+
+.operators>* {
+    height: 10px;
+    width: 12px;
+    padding: 1px;
+}
+
+.delete {
+    display: flex;
+    height: 50px;
+    width: 100px;
+    background-color:gold;
+    flex-direction: column
+
+}
+
+.delete>* {
+    height: 10px;
+    width: 100px;
+    padding: 1px;
 }
