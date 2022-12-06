@@ -35,43 +35,49 @@ function_buttons.forEach(function_button => {
     function_button.addEventListener('click', operate);
 });
 
+// * Create a function for backspace and clear *
 
 
 
 // Functions
 
-var add = function (a, b) {
+// Addition function
+function add(first_number_int, second_number_int) {
 
-    var sum = a + b
-    return sum 
+    let sum = first_number_int + second_number_int
+    console.log(sum)
+    return 
 
 }
 
-var subtract = function (a, b) {
+// Subtraction function
+function subtract(first_number_int, second_number_int) {
 
-    var difference  = a - b
-    return difference
+    let difference  = first_number_int - second_number_int
+    console.log(difference)
+    return
 }
 
-var multiply = function (a, b) {
+// Multiplication function
+function multiply(first_number_int, second_number_int) {
 
-    var product  = a * b
-    return product
+    let product  = first_number_int * second_number_int
+    console.log(product)
+    return
 }
 
-var divide  = function (a, b) {
+// Division function
+function divide(first_number_int, second_number_int) {
 
-    var quotient = a / b
-    return quotient 
+    let quotient = first_number_int/second_number_int
+    console.log(quotient)
+    return  
 }
 
 function operate(button) {
     // if else to see if the user to inputting the first number or the second number 
     clicked_button = button.target.id;
     clicked_button_class = button.target.className;
-    // clicked_number = button.target.id
-    // number_one.push(clicked_number)
-    // console.log(typeof clicked_button)
 
     //First number selection
     if(operator_selection.length === 0 && clicked_button_class == 'number_button'){
@@ -88,12 +94,63 @@ function operate(button) {
     } 
 
 
-    // if equals to sign is pressed, combine number_one and number_two, operate using 
-    if (button.target.id == '=') {
+    // if equals to sign is pressed, combine number_one and number_two, call math functions 
+    if (button.target.id == '=' && operator_selection.length != 0) {
+
+
+        
+        //convert first number array to integer variable
         const first_number = number_one.join('');
-        console.log("=")
+        const first_number_int = parseInt(first_number);
+
+        //convert second number array to integer variable
+        const second_number = number_two.join('');
+        const second_number_int = parseInt(second_number);
+
+        if (operator_selection == '+'){
+            // call addition function
+            add(first_number_int, second_number_int)
+
+            // clear variables
+            number_one = []
+            number_two = []
+            operator_selection = []
+
+        } else if (operator_selection == '-') {
+
+            //call function
+            subtract(first_number_int, second_number_int)
+
+            // clear variables
+            number_one = []
+            number_two = []
+            operator_selection = []
+        } else if (operator_selection == 'x') {
+
+            // call function
+            multiply(first_number_int, second_number_int)
+
+            // clear variables
+            number_one = []
+            number_two = []
+            operator_selection = []
+        } else if (operator_selection == '÷') {
+            
+            // Call function
+            divide(first_number_int, second_number_int)
+
+            // clear variables
+            number_one = []
+            number_two = []
+            operator_selection = []
+        } else {alert("please choose an operator")}
+
+        
+
+
 
     }
+    // Need to add a check to see if an operator was selected before the equals buttons is pressed 
 }
 
 
