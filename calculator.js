@@ -14,6 +14,7 @@
 var number_one = [];
 var number_two = [];
 var operator_selection = [];
+var display_content = [];
 const number_buttons = document.querySelectorAll('.number_button');
 const operator_buttons = document.querySelectorAll('.operator_button');
 const function_buttons = document.querySelectorAll('.function_button');
@@ -45,8 +46,7 @@ function_buttons.forEach(function_button => {
 function add(first_number_int, second_number_int) {
 
     let sum = first_number_int + second_number_int
-    console.log(sum)
-    return 
+    return sum
 
 }
 
@@ -54,27 +54,27 @@ function add(first_number_int, second_number_int) {
 function subtract(first_number_int, second_number_int) {
 
     let difference  = first_number_int - second_number_int
-    console.log(difference)
-    return
+    return difference
 }
 
 // Multiplication function
 function multiply(first_number_int, second_number_int) {
 
     let product  = first_number_int * second_number_int
-    console.log(product)
-    return
+    return product
 }
 
 // Division function
 function divide(first_number_int, second_number_int) {
 
     let quotient = first_number_int/second_number_int
-    console.log(quotient)
-    return  
+    return quotient 
 }
 
 function operate(button) {
+
+
+
     // if else to see if the user to inputting the first number or the second number 
     clicked_button = button.target.id;
     clicked_button_class = button.target.className;
@@ -85,6 +85,17 @@ function operate(button) {
     } else if (operator_selection.length != 0 && clicked_button_class == 'number_button') { // Second number selection
         number_two.push(button.target.id);
     }
+
+    // Change display text to show numbers
+    if (operator_selection.length == 0){
+        let first_display_number = number_one.join('')
+        document.getElementById('display').innerHTML  = first_display_number
+    } else if (operator_selection.length != 0){
+        let second_display_number = number_two.join('')
+        document.getElementById('display').innerHTML = second_display_number
+    }
+    
+
 
 
     // Operator selection
@@ -109,7 +120,8 @@ function operate(button) {
 
         if (operator_selection == '+'){
             // call addition function
-            add(first_number_int, second_number_int)
+            let addition_result = add(first_number_int, second_number_int)
+            document.getElementById('display').innerHTML = addition_result
 
             // clear variables
             number_one = []
@@ -118,8 +130,9 @@ function operate(button) {
 
         } else if (operator_selection == '-') {
 
-            //call function
-            subtract(first_number_int, second_number_int)
+            // call function
+            let subtraction_result = subtract(first_number_int, second_number_int)
+            document.getElementById('display').innerHTML = subtraction_result
 
             // clear variables
             number_one = []
@@ -129,6 +142,8 @@ function operate(button) {
 
             // call function
             multiply(first_number_int, second_number_int)
+            let multiplication_result = divide(first_number_int, second_number_int)
+            document.getElementById('display').innerHTML = multiplication_result
 
             // clear variables
             number_one = []
@@ -137,7 +152,8 @@ function operate(button) {
         } else if (operator_selection == '÷') {
             
             // Call function
-            divide(first_number_int, second_number_int)
+            let division_result = divide(first_number_int, second_number_int)
+            document.getElementById('display').innerHTML = division_result
 
             // clear variables
             number_one = []

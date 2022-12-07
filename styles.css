@@ -1,10 +1,31 @@
+/* 
+1. Make buttons look good
+    - clear button red
+    - backspace button light purple 
+    - Equals to sign orange 
+
+2. Make display look good
+3. Add an overall theme to the calculator 
+4. 
+
+
+*/
+
+.holder{
+    display: flex;
+    justify-content: center;
+
+}
+
 .calculator {
     display: flex;
-    width: 700px;
-    height: 700px;
+    width: 400px;
+    /* height: 700px; */
     justify-content: center;
     background-color: aqua;
     flex-direction: column;
+    /* left: 50% */
+    border: 5px solid yellow 
 }
 
 .display {
@@ -20,49 +41,53 @@
     flex-wrap: wrap;
     background-color: forestgreen;
 }
-
+/* Numbers Start */
 .numbers {
     display: flex;
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     background-color: #ff4500;
     flex-wrap: wrap;
-    height: 50px;
-    width: 40px;
+    height: 185px;
+    width: 140px;
 }
 
 .numbers>* {
-    height: 10px;
-    width: 12px;
-    padding: 1px;
+    height: 40px;
+    width: 40px;
+    padding: 5px;
 
 }
+/* Numbers End */
 
+/* Operators Start */
 .operators {
     display:flex;
-    height: 50px;
-    width: 20px;
+    height: 160px;
+    width: 50px;
     background-color:blueviolet;
     flex-direction: column
 }
 
 .operators>* {
-    height: 10px;
-    width: 12px;
+    height: 40px;
+    width: 40px;
     padding: 1px;
 }
+/* Operators End */
 
-.delete {
+/* Functions start */
+.functions{
     display: flex;
-    height: 50px;
+    height: 160px;
     width: 100px;
-    background-color:gold;
+    background-color: gold;
     flex-direction: column
-
 }
 
-.delete>* {
-    height: 10px;
+.functions>* {
+    height: 40px;
     width: 100px;
-    padding: 1px;
+    padding: 10px;
 }
+/* Functions End */
