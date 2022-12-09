@@ -90,6 +90,7 @@ function operate(button) {
     if(operator_selection.length === 0 && clicked_button_class == 'number_button'){
         number_one.push(button.target.id);
         let first_display_number = number_one.join('');
+        // code to add first number to display
         first_display_number_text = String(first_display_number);
         holding_screen_text = first_display_number_text; 
         document.getElementById('holding_display').innerHTML = holding_screen_text;
@@ -98,7 +99,7 @@ function operate(button) {
         number_two.push(button.target.id);
         let second_display_number = number_two.join('');
         second_display_number_text = String(second_display_number);
-        // need to combine first number + operator + second number and display it 
+        // code to add second number to display
         let operator_selection_string = String(operator_selection)
         final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
@@ -110,34 +111,22 @@ function operate(button) {
     if (button.target.id == '-' || button.target.id == '+' || button.target.id == 'x' ||
     button.target.id == '÷') {
         operator_selection.push(clicked_button);
-        // add code to make operator show up as soon as it's clicked
+        // Code to display operator when it is selected
         operator_selection_string = String(operator_selection);
         final_holding_screen_text = first_display_number_text + " " + operator_selection_string;
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
     }
-
-    // Change display text to show numbers
-    // if (operator_selection.length == 0){
-    //     let first_display_number = number_one.join('')
-    //     document.getElementById('holding_display').innerHTML  = first_display_number
-    //     let first_display_number_text = string(first_display_number)
-    // } else if (operator_selection.length != 0){
-    //     let second_display_number = number_two.join('')
-    //     let display_number =+ second_display_number
-    //     document.getElementById('holding_display').innerHTML = first_display_number
-    // }
-    
 
     // if equals to sign is pressed, combine number_one and number_two, call math functions 
     if (button.target.id == '=' && operator_selection.length != 0) {
 
         //convert first number array to integer variable
         const first_number = number_one.join('');
-        const first_number_int = parseInt(first_number);
+        const first_number_int = parseFloat(first_number);
 
         //convert second number array to integer variable
         const second_number = number_two.join('');
-        const second_number_int = parseInt(second_number);
+        const second_number_int = parseFloat(second_number);
 
         if (operator_selection == '+'){
             // call addition function
@@ -187,7 +176,14 @@ function operate(button) {
 
 
     }
-    // Need to add a check to see if an operator was selected before the equals buttons is pressed 
+
+    // Code for backspace button
+    if (button.target.id == 'Backspace' && number_two == 0) {
+        number_one.pop()
+        console.log(number_one)
+
+
+    }
 }
 
 
