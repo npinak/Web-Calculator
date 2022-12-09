@@ -15,9 +15,17 @@ var number_one = [];
 var number_two = [];
 var operator_selection = [];
 var display_content = [];
+
+// Event listener variable 
 const number_buttons = document.querySelectorAll('.number_button');
 const operator_buttons = document.querySelectorAll('.operator_button');
 const function_buttons = document.querySelectorAll('.function_button');
+
+// Display Variables
+var holding_screen_text
+var first_display_number_text
+var second_display_number_text
+var final_holding_screen_text
 
 
 // event listener for number buttons
@@ -74,7 +82,6 @@ function divide(first_number_int, second_number_int) {
 function operate(button) {
 
 
-
     // if else to see if the user to inputting the first number or the second number 
     clicked_button = button.target.id;
     clicked_button_class = button.target.className;
@@ -82,34 +89,48 @@ function operate(button) {
     //First number selection
     if(operator_selection.length === 0 && clicked_button_class == 'number_button'){
         number_one.push(button.target.id);
+        let first_display_number = number_one.join('');
+        first_display_number_text = String(first_display_number);
+        holding_screen_text = first_display_number_text; 
+        document.getElementById('holding_display').innerHTML = holding_screen_text;
+        
     } else if (operator_selection.length != 0 && clicked_button_class == 'number_button') { // Second number selection
         number_two.push(button.target.id);
+        let second_display_number = number_two.join('');
+        second_display_number_text = String(second_display_number);
+        // need to combine first number + operator + second number and display it 
+        let operator_selection_string = String(operator_selection)
+        final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
+        document.getElementById('holding_display').innerHTML = final_holding_screen_text;
+
+
+    }
+
+    // Operator selection
+    if (button.target.id == '-' || button.target.id == '+' || button.target.id == 'x' ||
+    button.target.id == '÷') {
+        operator_selection.push(clicked_button);
+        // add code to make operator show up as soon as it's clicked
+        operator_selection_string = String(operator_selection);
+        final_holding_screen_text = first_display_number_text + " " + operator_selection_string;
+        document.getElementById('holding_display').innerHTML = final_holding_screen_text;
     }
 
     // Change display text to show numbers
-    if (operator_selection.length == 0){
-        let first_display_number = number_one.join('')
-        document.getElementById('display').innerHTML  = first_display_number
-    } else if (operator_selection.length != 0){
-        let second_display_number = number_two.join('')
-        document.getElementById('display').innerHTML = second_display_number
-    }
+    // if (operator_selection.length == 0){
+    //     let first_display_number = number_one.join('')
+    //     document.getElementById('holding_display').innerHTML  = first_display_number
+    //     let first_display_number_text = string(first_display_number)
+    // } else if (operator_selection.length != 0){
+    //     let second_display_number = number_two.join('')
+    //     let display_number =+ second_display_number
+    //     document.getElementById('holding_display').innerHTML = first_display_number
+    // }
     
-
-
-
-    // Operator selection
-    if (button.target.id == '-' || button.target.id == '+' || button.target.id == 'x' || 
-    button.target.id == '÷') {
-        operator_selection.push(clicked_button);
-    } 
-
 
     // if equals to sign is pressed, combine number_one and number_two, call math functions 
     if (button.target.id == '=' && operator_selection.length != 0) {
 
-
-        
         //convert first number array to integer variable
         const first_number = number_one.join('');
         const first_number_int = parseInt(first_number);
@@ -121,7 +142,7 @@ function operate(button) {
         if (operator_selection == '+'){
             // call addition function
             let addition_result = add(first_number_int, second_number_int)
-            document.getElementById('display').innerHTML = addition_result
+            document.getElementById('result_display').innerHTML = addition_result
 
             // clear variables
             number_one = []
@@ -132,7 +153,7 @@ function operate(button) {
 
             // call function
             let subtraction_result = subtract(first_number_int, second_number_int)
-            document.getElementById('display').innerHTML = subtraction_result
+            document.getElementById('result_display').innerHTML = subtraction_result
 
             // clear variables
             number_one = []
@@ -143,7 +164,7 @@ function operate(button) {
             // call function
             multiply(first_number_int, second_number_int)
             let multiplication_result = divide(first_number_int, second_number_int)
-            document.getElementById('display').innerHTML = multiplication_result
+            document.getElementById('result_display').innerHTML = multiplication_result
 
             // clear variables
             number_one = []
@@ -153,7 +174,7 @@ function operate(button) {
             
             // Call function
             let division_result = divide(first_number_int, second_number_int)
-            document.getElementById('display').innerHTML = division_result
+            document.getElementById('result_display').innerHTML = division_result
 
             // clear variables
             number_one = []

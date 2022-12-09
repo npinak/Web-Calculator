@@ -14,12 +14,14 @@
 .holder{
     display: flex;
     justify-content: center;
+    align-items: center;
+    height: 500px
 
 }
 
 .calculator {
     display: flex;
-    width: 400px;
+    width: 350px;
     /* height: 700px; */
     justify-content: center;
     background-color: aqua;
@@ -62,27 +64,31 @@
 
 /* Operators Start */
 .operators {
-    display:flex;
-    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: purple;
+    flex-wrap: wrap;
+    height: 185px;
     width: 50px;
-    background-color:blueviolet;
-    flex-direction: column
 }
 
 .operators>* {
     height: 40px;
     width: 40px;
-    padding: 1px;
+    padding: 5px;
 }
 /* Operators End */
 
 /* Functions start */
 .functions{
     display: flex;
-    height: 160px;
-    width: 100px;
+    justify-content: center;
+    align-items: center;
     background-color: gold;
-    flex-direction: column
+    flex-wrap: wrap;
+    height: 50px;
+    width: 300px;
 }
 
 .functions>* {
