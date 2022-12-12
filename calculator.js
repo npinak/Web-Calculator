@@ -11,10 +11,11 @@
 */
 
 // Global Variables
-var number_one = [];
-var number_two = [];
-var operator_selection = [];
-var display_content = [];
+var number_one = []; // array for first number
+var number_two = []; // array for second number
+var operator_selection = []; // array for operator selector
+var display_content = []; // array for display
+var hold_number // array for continued math operations 
 
 // Event listener variable 
 const number_buttons = document.querySelectorAll('.number_button');
@@ -22,10 +23,11 @@ const operator_buttons = document.querySelectorAll('.operator_button');
 const function_buttons = document.querySelectorAll('.function_button');
 
 // Display Variables
-var holding_screen_text
-var first_display_number_text
-var second_display_number_text
-var final_holding_screen_text
+var holding_screen_text = ''
+var first_display_number_text = ''
+var second_display_number_text = ''
+var final_holding_screen_text = ''
+var operator_selection_string = ''
 
 
 // event listener for number buttons
@@ -79,6 +81,11 @@ function divide(first_number_int, second_number_int) {
     return quotient 
 }
 
+function updateDisplay(){
+    console.log(first_display_number_text)
+
+}
+
 function operate(button) {
 
 
@@ -94,6 +101,7 @@ function operate(button) {
         first_display_number_text = String(first_display_number);
         holding_screen_text = first_display_number_text; 
         document.getElementById('holding_display').innerHTML = holding_screen_text;
+        updateDisplay()
         
     } else if (operator_selection.length != 0 && clicked_button_class == 'number_button') { // Second number selection
         number_two.push(button.target.id);
@@ -107,7 +115,7 @@ function operate(button) {
 
     }
 
-    // Operator selection
+    // Operator selection !!!! Make an error check for 2 operator selections 
     if (button.target.id == '-' || button.target.id == '+' || button.target.id == 'x' ||
     button.target.id == '÷') {
         operator_selection.push(clicked_button);
@@ -151,8 +159,7 @@ function operate(button) {
         } else if (operator_selection == 'x') {
 
             // call function
-            multiply(first_number_int, second_number_int)
-            let multiplication_result = divide(first_number_int, second_number_int)
+            let multiplication_result = multiply(first_number_int, second_number_int)
             document.getElementById('result_display').innerHTML = multiplication_result
 
             // clear variables
@@ -171,19 +178,53 @@ function operate(button) {
             operator_selection = []
         } else {alert("please choose an operator")}
 
-        
-
-
-
+        holding_screen_text = ''
+        first_display_number_text = ''
+        second_display_number_text = ''
+        final_holding_screen_text = ''
+        operator_selection_string = ''
+        number_one = [];
+        number_two = [];
+        operator_selection = [];
+        display_content = [];
     }
 
     // Code for backspace button
-    if (button.target.id == 'Backspace' && number_two == 0) {
+    if (button.target.id == 'Backspace' && number_two.length === 0 && operator_selection.length === 0) {
         number_one.pop()
-        console.log(number_one)
-
-
+        let first_backspace_number = number_one.join('')
+        first_display_number_text = String(first_backspace_number)
+        final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
+        document.getElementById('holding_display').innerHTML = final_holding_screen_text;
+    } else if (button.target.id == 'Backspace' && number_two.length === 0 && operator_selection.length != 0){
+        operator_selection.pop()
+        operator_selection_string = operator_selection
+        final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
+        document.getElementById('holding_display').innerHTML = final_holding_screen_text;
+    } else if (button.target.id == 'Backspace' && number_two.length != 0 && operator_selection.length != 0){
+        console.log("backspace number two works!!!")
+        number_two.pop()
+        let second_backspace_number = number_two.join('')
+        second_display_number_text = String(second_backspace_number)
+        final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
+        document.getElementById('holding_display').innerHTML = final_holding_screen_text;
     }
+
+    // Clear Button
+    if (button.target.id == 'clear'){
+        holding_screen_text = ''
+        first_display_number_text = ''
+        second_display_number_text = ''
+        final_holding_screen_text = ''
+        operator_selection_string = ''
+        number_one = [];
+        number_two = [];
+        operator_selection = [];
+        display_content = [];
+        document.getElementById('holding_display').innerHTML = final_holding_screen_text;
+    }
+
+    //end script
 }
 
 
