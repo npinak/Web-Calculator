@@ -81,12 +81,17 @@ function divide(first_number_int, second_number_int) {
     return quotient 
 }
 
-function updateDisplay(){
-    console.log(first_display_number_text)
+function updateDisplay(){ // might not need this function
+    //console.log(first_display_number_text)
 
 }
 
 function operate(button) {
+
+    // Some notes to keep 
+    // if(hold_number != undefined){
+    //     console.log("hold_number is undefined")
+    // }
 
 
     // if else to see if the user to inputting the first number or the second number 
@@ -95,13 +100,14 @@ function operate(button) {
 
     //First number selection
     if(operator_selection.length === 0 && clicked_button_class == 'number_button'){
+        hold_number = void 0 // void holding number if user does not want to do any operations on it
         number_one.push(button.target.id);
         let first_display_number = number_one.join('');
         // code to add first number to display
         first_display_number_text = String(first_display_number);
         holding_screen_text = first_display_number_text; 
         document.getElementById('holding_display').innerHTML = holding_screen_text;
-        updateDisplay()
+        updateDisplay() // might need to delete this 
         
     } else if (operator_selection.length != 0 && clicked_button_class == 'number_button') { // Second number selection
         number_two.push(button.target.id);
@@ -115,7 +121,7 @@ function operate(button) {
 
     }
 
-    // Operator selection !!!! Make an error check for 2 operator selections 
+    // Operator selection !!!! Make an error check for 2 operator selections !!!!
     if (button.target.id == '-' || button.target.id == '+' || button.target.id == 'x' ||
     button.target.id == '÷') {
         operator_selection.push(clicked_button);
@@ -125,8 +131,10 @@ function operate(button) {
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
     }
 
-    // if equals to sign is pressed, combine number_one and number_two, call math functions 
-    if (button.target.id == '=' && operator_selection.length != 0) {
+    // if equals to sign is pressed, combine number_one and number_two, call math functions
+    // have to use hold_number on this code block
+    
+    if (button.target.id == '=' && operator_selection.length != 0 && hold_number === undefined){
 
         //convert first number array to integer variable
         const first_number = number_one.join('');
@@ -136,11 +144,12 @@ function operate(button) {
         const second_number = number_two.join('');
         const second_number_int = parseFloat(second_number);
 
+
         if (operator_selection == '+'){
             // call addition function
             let addition_result = add(first_number_int, second_number_int)
             document.getElementById('result_display').innerHTML = addition_result
-
+            hold_number = addition_result // hold number incase user wants continued operations
             // clear variables
             number_one = []
             number_two = []
@@ -151,7 +160,8 @@ function operate(button) {
             // call function
             let subtraction_result = subtract(first_number_int, second_number_int)
             document.getElementById('result_display').innerHTML = subtraction_result
-
+            hold_number = subtraction_result // hold number incase user wants continued operations 
+            
             // clear variables
             number_one = []
             number_two = []
@@ -161,6 +171,7 @@ function operate(button) {
             // call function
             let multiplication_result = multiply(first_number_int, second_number_int)
             document.getElementById('result_display').innerHTML = multiplication_result
+            hold_number = multiplication_result // hold number incase user wants continued operations 
 
             // clear variables
             number_one = []
@@ -171,6 +182,7 @@ function operate(button) {
             // Call function
             let division_result = divide(first_number_int, second_number_int)
             document.getElementById('result_display').innerHTML = division_result
+            hold_number = division_result // hold number incase user wants continued operations 
 
             // clear variables
             number_one = []
@@ -187,6 +199,22 @@ function operate(button) {
         number_two = [];
         operator_selection = [];
         display_content = [];
+    } else if (button.target.id == '=' && operator_selection.length != 0 && hold_number != undefined){
+        // code for continued operations
+        const continued_operation_number = hold_number
+        console.log(continued_operation_number)
+
+        if (operator_selection == '+') {
+            let addition_result = add(continued_operation_number, second_number_int)
+            document.getElementById('result_display').innerHTML = addition_result
+            hold_number = addition_result // hold number incase user wants continued operations
+            // clear variables
+            number_one = []
+            number_two = []
+            operator_selection = []
+
+        }
+
     }
 
     // Code for backspace button
@@ -202,7 +230,7 @@ function operate(button) {
         final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
     } else if (button.target.id == 'Backspace' && number_two.length != 0 && operator_selection.length != 0){
-        console.log("backspace number two works!!!")
+
         number_two.pop()
         let second_backspace_number = number_two.join('')
         second_display_number_text = String(second_backspace_number)
@@ -221,10 +249,12 @@ function operate(button) {
         number_two = [];
         operator_selection = [];
         display_content = [];
+        hold_number = void 0 
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
+        console.log(number_one) // testing 
     }
 
-    //end script
+    // end script
 }
 
 
