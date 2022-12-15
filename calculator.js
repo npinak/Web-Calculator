@@ -11,11 +11,12 @@
 */
 
 // Global Variables
-var number_one = []; // array for first number
+var number_one = [0]; // array for first number
 var number_two = []; // array for second number
 var operator_selection = []; // array for operator selector
 var hold_number // array for continued math operations
 var decimal = false // to make sure there isn't more than one decimal point in a number
+var first_digit_input = false 
 
 // Event listener variable 
 const number_buttons = document.querySelectorAll('.number_button');
@@ -25,11 +26,14 @@ const function_buttons = document.querySelectorAll('.function_button');
 // Display Variables
 var display_content = []; // array for display
 var holding_screen_text = ''
-var first_display_number_text = ''
+var first_display_number
+var second_display_number
+var first_display_number_text = '0'
 var second_display_number_text = ''
 var final_holding_screen_text = ''
 var operator_selection_string = ''
 var hold_display_number = ''
+document.getElementById('holding_display').innerHTML = first_display_number_text; // initialize first number as 0
 
 
 // event listener for number buttons
@@ -84,45 +88,26 @@ function divide(first_number_int, second_number_int) {
 }
 
 function updateDisplay(){ // might not need this function
-    //console.log(first_display_number_text)
 
 }
 
 function operate(button) {
-
+    
 
     // if else to see if the user to inputting the first number or the second number 
-    clicked_button = button.target.id; // -- this variable may not be being used 
+    clicked_button = button.target.id; 
     clicked_button_class = button.target.className;
-
-    // Addition of decimals to numbers
-    // have to change decimal button class
-    // if (operator_selection.length === 0 && clicked_button_class == 'decimal_button'){
-    //     if(button.target.id == "." && decimal == false){
-    //         decimal = true
-    //         number_two.push(button.target.id);
-    //         let second_display_number = number_two.join('');
-    //         second_display_number_text = String(second_display_number);
-            
-    //         if (hold_number === undefined) {
-    //             let operator_selection_string = String(operator_selection)
-    //             final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
-    //             document.getElementById('holding_display').innerHTML = final_holding_screen_text;
-    //         } else { // code to add second number to display after first operation has been finished. 
-    //             document.getElementById('holding_display').innerHTML = hold_number + " " + String(operator_selection) + " " + String(second_display_number)
-    //         }
-
-    //     } else if (button.target.id == "." && decimal == true){
-    //         alert("please choose another button")
-    //     }
-    // }
-
-
 
     //First number selection -- need to disable decimals if already present in the number
     if(operator_selection.length === 0 && clicked_button_class == 'number_button'){
-        // Need additional code to check if a decimal has been chosen
         hold_number = void 0 // void holding number if user does not want to do any operations on it
+
+        if(first_digit_input == false){
+            number_one.pop()
+            document.getElementById('holding_display').innerHTML = ""
+            first_digit_input = true 
+        }
+
 
         if (button.target.id == "." && decimal == false){
             decimal = true
@@ -132,12 +117,14 @@ function operate(button) {
             first_display_number_text = String(first_display_number);
             holding_screen_text = first_display_number_text;
             document.getElementById('holding_display').innerHTML = holding_screen_text;
+            // testing 
+    
 
         } else if (button.target.id == "." && decimal == true) {
-            alert("please choose a different button")
+            alert("please choose a different button") // incase a decimal is already present in the number
         } else {
             number_one.push(button.target.id);
-            let first_display_number = number_one.join('');
+            first_display_number = number_one.join('');
             // code to add first number to display
             first_display_number_text = String(first_display_number);
             holding_screen_text = first_display_number_text;
@@ -145,22 +132,13 @@ function operate(button) {
         }  
         
         
-        // number_one.push(button.target.id);
-        // let first_display_number = number_one.join('');
-        // // code to add first number to display
-        // first_display_number_text = String(first_display_number);
-        // holding_screen_text = first_display_number_text; 
-        // document.getElementById('holding_display').innerHTML = holding_screen_text;
-        // updateDisplay() // might need to delete this
-        
     } else if (operator_selection.length != 0 && clicked_button_class == 'number_button'){ // Second number selection
-        // Need to add code to check if a decimal has been chosen
         
         // To check if there are two decimals in one number 
         if(button.target.id == "." && decimal == false){ // this is to push a decimal into the number array
             decimal = true
             number_two.push(button.target.id);
-            let second_display_number = number_two.join('');
+            second_display_number = number_two.join('');
             second_display_number_text = String(second_display_number);
             
             if (hold_number === undefined) {
@@ -187,37 +165,48 @@ function operate(button) {
                 document.getElementById('holding_display').innerHTML = hold_number + " " + String(operator_selection) + " " + String(second_display_number)
             }
         }
-        // number_two.push(button.target.id);
-        // let second_display_number = number_two.join('');
-        // second_display_number_text = String(second_display_number);
-     
-        // code to add second number to display after first operation
-        // if (hold_number === undefined){
-        //     let operator_selection_string = String(operator_selection)
-        //     final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
-        //     document.getElementById('holding_display').innerHTML = final_holding_screen_text;
-        // } else { // code to add second number to display after first operation has been finished. 
-        //     document.getElementById('holding_display').innerHTML = hold_number + " " + String(operator_selection) + " " + String(second_display_number)
-        // }
     }
 
     // Operator selection !!!! Make an error check for 2 operator selections (additional code needed) !!!!
     // make an error check for no first number input (additional code needed)
 
     if (button.target.id == '-' || button.target.id == '+' || button.target.id == 'x' ||
-    button.target.id == '÷') {
+        button.target.id == '÷'){
         operator_selection.push(clicked_button);
         // display operator when it is selected
         operator_selection_string = String(operator_selection);
-        final_holding_screen_text = first_display_number_text + " " + operator_selection_string;
-        document.getElementById('holding_display').innerHTML = final_holding_screen_text;
+        holding_screen_text = first_display_number_text + " " + operator_selection_string;
+        document.getElementById('holding_display').innerHTML = holding_screen_text
         decimal = false // reset decimal checker if second number has been selected 
         // display hold number for continued operations 
-        if (hold_number != undefined){
+        if (hold_number != undefined) {
             hold_display_number = String(hold_number) + " " + String(operator_selection)
             document.getElementById('holding_display').innerHTML = hold_display_number
         }
-    }
+        }
+
+    // array length test
+    if (operator_selection.length > 1){
+        // need to make a seperate display variable in case there is a hold number  
+
+        alert("please select only one operator at a time")
+        operator_selection.pop()
+        operator_selection_string = String(operator_selection);
+        if (hold_number == undefined){
+            first_display_number_text = String(first_display_number)
+        } else if (hold_number != undefined){
+            first_display_number_text = String(hold_number)
+        }
+        holding_screen_text = first_display_number_text + " " + operator_selection_string;
+        document.getElementById('holding_display').innerHTML = holding_screen_text
+        console.log(hold_number) 
+    } 
+    
+
+        
+
+    
+    
 
     // if equals to sign is pressed, combine number_one and number_two, call math functions
     
@@ -289,7 +278,6 @@ function operate(button) {
     } else if (button.target.id == '=' && operator_selection.length != 0 && hold_number != undefined){
         // code for continued operations
         const continued_operation_number = hold_number
-        console.log(continued_operation_number)
 
         //convert second number array to integer variable
         const second_number = number_two.join('');
