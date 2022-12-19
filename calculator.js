@@ -1,14 +1,5 @@
-/*
-1. Add event listener to each number button
-2. Make an array object for number a
-    i. display the numbers on the display 
-3. When user presses a operator button make a new array for array b 
-    i.Clear display
-4. Add numbers selected to array
-    i. add numbers to display
-
-
-*/
+// Additional functionality
+// - make a negative/positive button
 
 // Global Variables
 var number_one = [0]; // array for first number
@@ -94,19 +85,23 @@ function updateDisplay(){ // might not need this function
 function operate(button) {
     
 
+
     // if else to see if the user to inputting the first number or the second number 
     clicked_button = button.target.id; 
     clicked_button_class = button.target.className;
 
-    //First number selection -- need to disable decimals if already present in the number
+
+    //First number selection
     if(operator_selection.length === 0 && clicked_button_class == 'number_button'){
         hold_number = void 0 // void holding number if user does not want to do any operations on it
 
+        // Get rid of inital 0 when clicking first button
         if(first_digit_input == false){
             number_one.pop()
             document.getElementById('holding_display').innerHTML = ""
-            first_digit_input = true 
+            first_digit_input = true
         }
+
 
 
         if (button.target.id == "." && decimal == false){
@@ -117,8 +112,7 @@ function operate(button) {
             first_display_number_text = String(first_display_number);
             holding_screen_text = first_display_number_text;
             document.getElementById('holding_display').innerHTML = holding_screen_text;
-            // testing 
-    
+ 
 
         } else if (button.target.id == "." && decimal == true) {
             alert("please choose a different button") // incase a decimal is already present in the number
@@ -203,14 +197,17 @@ function operate(button) {
     } 
     
 
-        
-
     
     
 
     // if equals to sign is pressed, combine number_one and number_two, call math functions
     
     if (button.target.id == '=' && operator_selection.length != 0 && hold_number === undefined){
+
+        if(number_two.length == 0){
+            alert("please enter a second number")
+            return
+        }
 
         //convert first number array to integer variable
         const first_number = number_one.join('');
@@ -276,7 +273,14 @@ function operate(button) {
         operator_selection = [];
         display_content = [];
     } else if (button.target.id == '=' && operator_selection.length != 0 && hold_number != undefined){
-        // code for continued operations
+        
+        //check if second number has been entered
+        if (number_two.length == 0) {
+            alert("please enter a second number")
+            return
+        }
+        
+        // code for continued operation from previous result 
         const continued_operation_number = hold_number
 
         //convert second number array to integer variable
@@ -328,30 +332,41 @@ function operate(button) {
 
     }
 
+////////////////////////////
 
 
-
-
-
-// //////////////////////////////////////////////
-
-
-
-    // Code for backspace button -- need to add decimal check (additional code)
+    // Code for backspace button 
     if (button.target.id == 'Backspace' && number_two.length === 0 && operator_selection.length === 0) {
-        number_one.pop()
+        number_one.pop() // delete 
+
+        // decimal check 
+        let decimal_check = number_one.includes(".")
+        if (decimal_check == true) {
+            decimal = true
+        } else if (decimal_check == false) {
+            decimal = false
+        }
         let first_backspace_number = number_one.join('')
         first_display_number_text = String(first_backspace_number)
         final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
     } else if (button.target.id == 'Backspace' && number_two.length === 0 && operator_selection.length != 0){
-        operator_selection.pop()
+        operator_selection.pop() // delete
         operator_selection_string = operator_selection
         final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
     } else if (button.target.id == 'Backspace' && number_two.length != 0 && operator_selection.length != 0){
 
-        number_two.pop()
+        number_two.pop() // delete
+        
+        // decimal check 
+        let decimal_check = number_two.includes(".") 
+        if (decimal_check == true){
+            decimal = true
+        } else if (decimal_check == false) {
+            decimal = false
+        }
+
         let second_backspace_number = number_two.join('')
         second_display_number_text = String(second_backspace_number)
         final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text

@@ -11,11 +11,36 @@
 
 */
 
+body {
+    background-color: #001253;
+}
+
+.holding_display {
+    width: 350px;
+    height: 20px;
+    background-color: #5F9DF7;
+    border-top: 1px solid #EB6440;
+    border-right: 1px solid #EB6440;
+    border-left: 1px solid #EB6440;
+
+}
+
+.result_display {
+    width: 350px;
+    height:20px;
+    background-color: #5F9DF7;
+    border-bottom: 1px solid #EB6440;
+    border-right: 1px solid #EB6440;
+    border-left: 1px solid #EB6440;
+}
+
 .holder{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px
+    height: 750px;
+    width: 100%;
+    background-color: #001253
 
 }
 
@@ -24,10 +49,11 @@
     width: 350px;
     /* height: 700px; */
     justify-content: center;
-    background-color: aqua;
+    background-color: #3E6D9C;
     flex-direction: column;
     /* left: 50% */
-    border: 5px solid yellow 
+    border: 5px solid #3E6D9C;
+    box-shadow: 10px 10px;
 }
 
 .display {
@@ -41,14 +67,14 @@
     justify-content: center;
     align-items: flex-end;
     flex-wrap: wrap;
-    background-color: forestgreen;
+    background-color: #3E6D9C;
 }
 /* Numbers Start */
 .numbers {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ff4500;
+    background-color: #3E6D9C;
     flex-wrap: wrap;
     height: 185px;
     width: 140px;
@@ -58,8 +84,9 @@
     height: 40px;
     width: 40px;
     padding: 5px;
-
+    background-color: #628E90;
 }
+
 /* Numbers End */
 
 /* Operators Start */
@@ -67,7 +94,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: purple;
+    /* background-color: purple; */
     flex-wrap: wrap;
     height: 185px;
     width: 50px;
@@ -85,7 +112,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gold;
+    background-color: #3E6D9C;
     flex-wrap: wrap;
     height: 50px;
     width: 300px;
