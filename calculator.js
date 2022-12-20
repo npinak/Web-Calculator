@@ -1,5 +1,8 @@
 // Additional functionality
 // - make a negative/positive button
+// - have to change IDs to have letter descriptions
+// - have to add value attribute to the buttons
+// - change the design of the calculator 
 
 // Global Variables
 var number_one = [0]; // array for first number
