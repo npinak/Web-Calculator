@@ -86,11 +86,12 @@ function updateDisplay(){ // might not need this function
 }
 
 function operate(button) {
-    
+    // testing
+    // console.log(button.target.value)
 
 
     // if else to see if the user to inputting the first number or the second number 
-    clicked_button = button.target.id; 
+    clicked_button = button.target.value; 
     clicked_button_class = button.target.className;
 
 
@@ -107,9 +108,9 @@ function operate(button) {
 
 
 
-        if (button.target.id == "." && decimal == false){
+        if (button.target.value == "." && decimal == false){
             decimal = true
-            number_one.push(button.target.id);
+            number_one.push(button.target.value);
             let first_display_number = number_one.join('');
             // code to add first number to display
             first_display_number_text = String(first_display_number);
@@ -117,10 +118,10 @@ function operate(button) {
             document.getElementById('holding_display').innerHTML = holding_screen_text;
  
 
-        } else if (button.target.id == "." && decimal == true) {
+        } else if (button.target.value == "." && decimal == true) {
             alert("please choose a different button") // incase a decimal is already present in the number
         } else {
-            number_one.push(button.target.id);
+            number_one.push(button.target.value);
             first_display_number = number_one.join('');
             // code to add first number to display
             first_display_number_text = String(first_display_number);
@@ -132,9 +133,9 @@ function operate(button) {
     } else if (operator_selection.length != 0 && clicked_button_class == 'number_button'){ // Second number selection
         
         // To check if there are two decimals in one number 
-        if(button.target.id == "." && decimal == false){ // this is to push a decimal into the number array
+        if(button.target.value == "." && decimal == false){ // this is to push a decimal into the number array
             decimal = true
-            number_two.push(button.target.id);
+            number_two.push(button.target.value);
             second_display_number = number_two.join('');
             second_display_number_text = String(second_display_number);
             
@@ -146,10 +147,10 @@ function operate(button) {
                 document.getElementById('holding_display').innerHTML = hold_number + " " + String(operator_selection) + " " + String(second_display_number)
             }
 
-        } else if (button.target.id == "." && decimal == true){
+        } else if (button.target.value == "." && decimal == true){
             alert("please choose another button")
         } else { // this is to push a regular digit to the number array 
-            number_two.push(button.target.id);
+            number_two.push(button.target.value);
             let second_display_number = number_two.join('');
             second_display_number_text = String(second_display_number);
 
@@ -167,8 +168,8 @@ function operate(button) {
     // Operator selection !!!! Make an error check for 2 operator selections (additional code needed) !!!!
     // make an error check for no first number input (additional code needed)
 
-    if (button.target.id == '-' || button.target.id == '+' || button.target.id == 'x' ||
-        button.target.id == '÷'){
+    if (button.target.value == '-' || button.target.value == '+' || button.target.value == 'x' ||
+        button.target.value == '÷'){
         operator_selection.push(clicked_button);
         // display operator when it is selected
         operator_selection_string = String(operator_selection);
@@ -205,7 +206,7 @@ function operate(button) {
 
     // if equals to sign is pressed, combine number_one and number_two, call math functions
     
-    if (button.target.id == '=' && operator_selection.length != 0 && hold_number === undefined){
+    if (button.target.value == '=' && operator_selection.length != 0 && hold_number === undefined){
 
         if(number_two.length == 0){
             alert("please enter a second number")
@@ -275,7 +276,7 @@ function operate(button) {
         number_two = [];
         operator_selection = [];
         display_content = [];
-    } else if (button.target.id == '=' && operator_selection.length != 0 && hold_number != undefined){
+    } else if (button.target.value == '=' && operator_selection.length != 0 && hold_number != undefined){
         
         //check if second number has been entered
         if (number_two.length == 0) {
@@ -339,7 +340,7 @@ function operate(button) {
 
 
     // Code for backspace button 
-    if (button.target.id == 'Backspace' && number_two.length === 0 && operator_selection.length === 0) {
+    if (button.target.value == 'Backspace' && number_two.length === 0 && operator_selection.length === 0) {
         number_one.pop() // delete 
 
         // decimal check 
@@ -353,12 +354,12 @@ function operate(button) {
         first_display_number_text = String(first_backspace_number)
         final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
-    } else if (button.target.id == 'Backspace' && number_two.length === 0 && operator_selection.length != 0){
+    } else if (button.target.value == 'Backspace' && number_two.length === 0 && operator_selection.length != 0){
         operator_selection.pop() // delete
         operator_selection_string = operator_selection
         final_holding_screen_text = first_display_number_text + " " + operator_selection_string + " " + second_display_number_text
         document.getElementById('holding_display').innerHTML = final_holding_screen_text;
-    } else if (button.target.id == 'Backspace' && number_two.length != 0 && operator_selection.length != 0){
+    } else if (button.target.value == 'Backspace' && number_two.length != 0 && operator_selection.length != 0){
 
         number_two.pop() // delete
         
@@ -377,7 +378,7 @@ function operate(button) {
     }
 
     // Clear Button
-    if (button.target.id == 'clear'){
+    if (button.target.value == 'clear'){
         holding_screen_text = ''
         first_display_number_text = ''
         second_display_number_text = ''

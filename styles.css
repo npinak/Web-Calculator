@@ -15,6 +15,12 @@ body {
     background-color: #001253;
 }
 
+.displays { 
+    padding: 100px; 
+/* padding not working */
+
+}
+
 .holding_display {
     width: 350px;
     height: 20px;
@@ -32,6 +38,7 @@ body {
     border-bottom: 1px solid #EB6440;
     border-right: 1px solid #EB6440;
     border-left: 1px solid #EB6440;
+    align-items: flex-start;
 }
 
 .holder{
@@ -47,13 +54,13 @@ body {
 .calculator {
     display: flex;
     width: 350px;
-    /* height: 700px; */
-    justify-content: center;
+    height: 500px;
     background-color: #3E6D9C;
     flex-direction: column;
     /* left: 50% */
     border: 5px solid #3E6D9C;
     box-shadow: 10px 10px;
+    align-items: flex-start;
 }
 
 .display {
@@ -80,11 +87,28 @@ body {
     width: 140px;
 }
 
-.numbers>* {
+.number_button {
     height: 40px;
     width: 40px;
     padding: 5px;
     background-color: #628E90;
+    border-radius: 12px;
+}
+
+#equal {
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    background-color: #628E90;
+    border-radius: 12px;
+}
+
+.function_button {
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    background-color: #628E90;
+
 }
 
 /* Numbers End */
@@ -124,3 +148,5 @@ body {
     padding: 10px;
 }
 /* Functions End */
+
+
